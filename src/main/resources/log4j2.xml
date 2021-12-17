@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Configuration 后面的 status，这个用于设置 log4j2 自身内部的信息输出级别，可以不设置，当设置成 trace 时，你会看到 log4j2 内部各种详细输出-->
+<!--monitorInterval：Log4j2 能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<configuration status="INFO"  monitorInterval="30">
+  <!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+
+  <!--变量配置-->
+  <Properties>
+    <!-- 格式化输出：%date 表示日期，%thread 表示线程名，%-5level：级别从左显示 5 个字符宽度 %msg：日志消息，%n 是换行符-->
+    <!-- %logger{36} 表示 Logger 名字最长 36 个字符 -->
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level [%logger{50}:%L] - %msg%n" />
+    <!-- 定义日志存储的路径 -->
+    <property name="FILE_PATH" value="/var/log/songo" />
+    <property name="FILE_NAME" value="songo" />
+  </Properties>
+
+  <appenders>
+
+    <console name="Console" target="SYSTEM_OUT">
+      <!--输出日志的格式-->
+      <PatternLayout pattern="${LOG_PATTERN}" charset="UTF-8"/>
+    </console>
+  </appenders>
+
+  <!--Logger 节点用来单独指定日志的形式，比如要为指定包下的 class 指定不同的日志级别等。-->
+  <!--然后定义 loggers，只有定义了 logger 并引入的 appender，appender 才会生效-->
+  <loggers>
+
+  </loggers>
+</configuration>
